@@ -30,26 +30,10 @@ public class Main {
 		rec(i+1);
 
 		S[i] = true;
-		for(int j = 0; j < n; j++) {
-			if(S[j]) {
-				System.out.print("1 ");
-			} else {
-				System.out.print("0 ");
-			}
-		}
-		System.out.println();
 
 		rec(i+1);
 
 		S[i] = false;
-		for(int j = 0; j < n; j++) {
-			if(S[j]) {
-				System.out.print("1 ");
-			} else {
-				System.out.print("0 ");
-			}
-		}
-		System.out.println();
 	}
 
 }
