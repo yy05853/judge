@@ -28,11 +28,8 @@ public class Main {
 		}
 
 		rec(i+1);
-
 		S[i] = true;
-
 		rec(i+1);
-
 		S[i] = false;
 	}
 

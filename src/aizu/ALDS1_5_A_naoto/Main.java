@@ -1,4 +1,4 @@
-package aizu.ALDS1_5_A;
+package aizu.ALDS1_5_A_naoto;
 
 import java.util.Scanner;
 
