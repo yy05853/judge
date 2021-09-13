@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+// 双方向リスト
 public class Main {
 
 	public static void main(String[] args) {
