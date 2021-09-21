@@ -2,6 +2,7 @@ package aizu.ALDS1_2_A;
 
 import java.util.Scanner;
 
+// バブルソート
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
