@@ -3,7 +3,6 @@ package aizu.ALDS1_4_A;
 import java.util.Scanner;
 
 // 線形探索
-// 入力例3の出力が4になる
 public class Main {
 	public static int n;
 	public static int[] s;
@@ -14,20 +13,20 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 
 		n = sc.nextInt();
-		s = new int[n];
+		s = new int[n+1];
 		for(int i = 0; i< n; i++) {
 			s[i] = sc.nextInt();
 		}
 		q = sc.nextInt();
-		t= new int [q+1];
+		t= new int [q];
 		for(int i = 0; i< q; i++) {
 			t[i] = sc.nextInt();
 		}
 
 
 		int num = 0;
-		for(int i = 0; i< n; i++) {
-			int tmp = linearSearch(s[i]);
+		for(int i = 0; i< q; i++) {
+			int tmp = linearSearch(t[i]);
 			if(tmp != -1) {
 				num++;
 			}
@@ -39,11 +38,11 @@ public class Main {
 
 	public static int linearSearch(int key) {
 		int i = 0;
-		t[q] = key;
-		while (t[i] != key) {
+		s[n] = key;
+		while (s[i] != key) {
 			i++;
 		}
-		if(i == q) {
+		if(i == n) {
 			return -1;
 		}
 		return key;
