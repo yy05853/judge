@@ -2,6 +2,7 @@ package aizu.ALDS1_4_B;
 
 import java.util.Scanner;
 
+// 二分探索
 public class Main {
 	public static int n;
 	public static int[] s;
