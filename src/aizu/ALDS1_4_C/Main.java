@@ -1,74 +1,98 @@
 package aizu.ALDS1_4_C;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
-//TLE
-//https://yamakasa3.hatenablog.com/entry/2018/05/20/014730
 public class Main {
-
-	private static String[] dic;
-	private static String[] ans;
-
+	public static int M = 1046527;
+	public static char H[][] = new char[M][14];
+	public static char x[] = new char[14];
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-
-		int n = sc.nextInt();
-
-		dic = new String[n];
-		ans = new String[n];
-		for(int i = 0; i < n; i++) {
-			dic[i] = "Z";
-		}
-		int num = 0;
-		int ansNum = 0;
-		for(int i = 0; i < n; i++) {
-			String a = sc.next();
-			if("insert".equals(a)) {
-				dic[num] = sc.next();
- 				num++;
+		Scanner scan = new Scanner(System.in);
+		int N = scan.nextInt();
+		String cmd, s;
+		for(int i = 0; i < N; i++) {
+			char[] str = new char[14];
+			cmd = scan.next();
+			s = scan.next();
+			for(int j = 0; j < s.length(); j++) {
+				str[j] = s.charAt(j);
+			}
+			if(cmd.charAt(0) == 'i') {
+				insert(str);
 			} else {
-				Arrays.sort(dic);
-				if(binarySearch(sc.next(), num) == null) {
-					ans[ansNum] = "no";
+				if(find(str) == 1) {
+					System.out.println("yes");
 				} else {
-					ans[ansNum] = "yes";
+					System.out.println("no");
 				}
-				ansNum++;
 			}
 		}
+		scan.close();
+	}
+	public static int getChar(char ch) {
+		if(ch == 'A') return 1;
+		else if(ch == 'C') return 2;
+		else if(ch == 'G') return 3;
+		else if(ch == 'T') return 4;
+		else return 0;
+	}
 
-		for(int i = 0 ; i < ansNum; i++ ) {
-			System.out.println(ans[i]);
+	public static long getKey(char[] str) {
+		long sum = 0;
+		long p = 1;
+		for(int i = 0; i < 14; i++) {
+			sum += p * (getChar(str[i]));
+			p *= 5;
+		}
+		return sum;
+	}
+	public static int find(char[] str) {
+		long key = getKey(str);
+		int h;
+		for(int i = 0;; i++) {
+			h = (h1(key) + i * h2(key)) % M;
+
+			if(isCheck(H[h], str)) return 1;
+			else if(H[h][0] == x[0]) return 0;
 		}
 	}
-//	public static String linearSearch(String key, int n) {
-//		int i = 0;
-//		dic[n] = key;
-//		while (!dic[i].equals(key)) {
-//			i++;
-//		}
-//		if(i == n) {
-//			return null;
-//		}
-//		return key;
-//	}
+	public static boolean isCheck(char[] c1, char[] c2) {
+		for(int i = 0; i < 14; i++) {
+			if(c1[i] != c2[i]) {
+				return false;
 
-	private static String binarySearch(String i, int n) {
-		int left = 0;
-		int right = n;
-		while(left < right) {
-			int mid = (left + right) / 2;
-			if(dic[mid].equals(i)) {
-				return i;
-			} else if(dic[mid].compareTo(i) > 0) {
-				right = mid;
-			} else {
-				left = mid+1;
 			}
 		}
-
-		return null;
+		return true;
 	}
+	public static void strcpy(char[] c1, char[] c2) {
+		for(int i = 0; i < 14; i++) {
+			c1[i] = c2[i];
+		}
+	}
+	public static int insert(char str[]) {
 
+		long key = getKey(str);
+		int h;
+		for(int i = 0; ; i++) {
+			h =(h1(key) + i * h2(key)) % M;
+			if(isCheck(H[h], str)) return 1;
+			else if(H[h][0] == x[0]) {
+				strcpy(H[h], str);
+				return 0;
+			}
+		}
+	}
+	public static int h1(long key) {
+		return (int)(key % M);
+	}
+	public static int h2(long key) {
+		return (int)(key % (M -1));
+	}
+	public static void disp(char[] c) {
+		for(int i = 0; i < 14; i++) {
+			System.out.print(c[i]);
+		}
+		System.out.println();
+	}
 }
